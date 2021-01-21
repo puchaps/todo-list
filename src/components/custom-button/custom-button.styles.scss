@@ -1,0 +1,74 @@
+.custom-button {
+
+  .custom-button-btn {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px black;
+    transition: all 1s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #19283F;
+      color: white;
+      border: 1px solid white;
+    }
+  }
+
+  .custom-button-btn.login, .custom-button-btn.logout {
+    width: 100px;
+    
+  }
+
+  .custom-button-btn.logout {
+    background-color: #19283F;
+    color: white;
+    border: 1px solid white;
+
+    &:hover {
+      color: black;
+      background-color: #ffffff;
+    }
+  }
+
+  .custom-button-btn.add {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin-left: 1px;
+  }
+
+  .custom-button-btn.mark, .custom-button-btn.delete {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 25px;
+  }
+
+  .custom-button-btn.delete {
+    margin-left: 1px;
+    background-color: red;
+  }
+
+  .custom-button-btn.mark {
+    background-color: green;
+  }
+
+  .custom-button-btn.mark.noted {
+    color: white;
+    border: 1px solid white;
+
+    &:hover {
+      background-color: green;
+      border: none;
+      color: black;
+    }
+  }
+
+}

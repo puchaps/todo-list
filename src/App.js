@@ -1,17 +1,18 @@
-import React from 'react';
 
-import './css/Main.css';
+import ContentPreview from './components/content-preview/content-preview.component';
+import Footer from './components/footer/footer.component';
+import Header from './components/header/header.component';
+import MainProvider from './context/main.context';
 
-import HeaderComponent from './components/header/Header.component';
-import ContentComponent from './components/content/Content.component';
-
-function App() {
+const App = () => {
   return (
-    <main className = "main-app">
-      <HeaderComponent/>
-      <ContentComponent/>
-    </main>
-
+    <div className = "app">
+      <MainProvider>
+        <Header/>
+        <ContentPreview/>
+        <Footer/>
+      </MainProvider>
+    </div>
   );
 }
 

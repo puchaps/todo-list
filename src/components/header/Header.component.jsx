@@ -1,18 +1,43 @@
-import React from 'react';
+import { useContext } from 'react';
+import { MainContext } from '../../context/main.context';
 
-import '../../css/Main.css';
+import './header.styles.scss';
 
 import Logo from '../../img/logo/homework.svg';
 
-const HeaderComponent = () => {
+import { AUTH, signInWithHelpGoogleAcount } from '../../firebase/firebase.utils';
+import { signOutFromAcoountAC } from '../../context/actions/main.actions';
+
+import CustomButton from '../custom-button/custom-button.component';
+
+const Header = () => {
+  const{state: {currentUser}, dispatch} = useContext(MainContext);
+
   return(
-    <header>
-      <div className = 'main-header'>
-        <a href = '#'><img className = 'main-logo' src = {Logo} alt = 'logo'/></a>
-        <button className = 'main-btn'>LOGIN</button>
+    <div className = 'header'>
+      <div className = 'header-logo'>
+        <a href = '#'>
+          <img src = {Logo} alt = 'logo'/>
+        </a>
       </div>
-    </header>
+      <div className="header-btn">
+        {
+          currentUser ? (
+            <CustomButton typeBtn = 'logout' onClick = {() => {
+              AUTH.signOut();
+              dispatch(signOutFromAcoountAC());
+            }}>
+              LOGOUT
+            </CustomButton>
+          ) : (
+            <CustomButton typeBtn = 'login' onClick = {signInWithHelpGoogleAcount}>
+              LOGIN
+            </CustomButton>
+          )
+        }
+      </div>
+    </div>
   )
 };
 
-export default HeaderComponent;
+export default Header;

@@ -1,0 +1,19 @@
+.added-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .added-item-text {
+    padding: 5px 10px;
+    width: 85%;
+    background-color: #ffffff;
+    color: black;
+    font-size: 18px;
+  }
+
+  .added-item-btns {
+    display: flex;
+    justify-content: space-between;
+  }
+}

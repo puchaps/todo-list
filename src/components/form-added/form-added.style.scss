@@ -1,0 +1,24 @@
+.form-added {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 20px black;
+  margin-top: 50px;
+
+  .form-added-input {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    form {
+      width: 100%;
+      display: flex;
+    }
+
+  }
+
+  .form-added-select {
+    width: 30%;
+    margin-left: 10px;
+  }
+}
