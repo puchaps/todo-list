@@ -17,11 +17,6 @@ const mainReducer = (state, action) => {
         ...state,
         inputValue: action.payload
       };
-    case ADD_ITEM_TO_TODO_LIST:
-      return {
-        ...state,
-        todoListItems: addedItemToTodoList(state.todoListItems, state.inputValue)
-      };
     case CLEAR_INPUT_VALUE:
       return {
         ...state,
@@ -31,6 +26,11 @@ const mainReducer = (state, action) => {
       return {
         ...state,
         selectValue: action.payload
+      };
+    case ADD_ITEM_TO_TODO_LIST:
+      return {
+        ...state,
+        todoListItems: addedItemToTodoList(state.todoListItems, state.inputValue)
       };
     case DELETE_ITEM_FROM_TODO_LIST:
       return {
