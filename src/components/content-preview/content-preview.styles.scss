@@ -10,3 +10,59 @@
     margin-top: 20vh;
   }
 }
+
+
+@media screen and (max-width: 2560px) {
+  .content-preview {
+    width: 30%;
+    .content-preview-title {
+      font-size: 2vw;
+    }
+  }
+}
+
+@media screen and (max-width: 2300px) {
+  .content-preview {
+    width: 35%;
+    .content-preview-title {
+      font-size: 2.5vw;
+    }
+  }
+}
+
+
+@media screen and (max-width: 1440px) {
+  .content-preview {
+    width: 50%;
+    .content-preview-title {
+      font-size: 4vw;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .content-preview {
+    width: 55%;
+    .content-preview-title {
+      font-size: 4vw;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content-preview {
+    width: 70%;
+    .content-preview-title {
+      font-size: 5vw;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content-preview {
+    width: 90%;
+    .content-preview-title {
+      font-size: 8vw;
+    }
+  }
+}
