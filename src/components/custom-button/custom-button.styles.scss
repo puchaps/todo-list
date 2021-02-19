@@ -8,6 +8,7 @@
     box-shadow: 0 1px 5px black;
     transition: all 1s;
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.7);
 
     &:hover {
       background-color: #19283F;
@@ -52,12 +53,12 @@
   }
 
   .custom-button-btn.delete {
-    margin-left: 1px;
+    margin-left: 2px;
     background-color: red;
   }
 
   .custom-button-btn.mark {
-    background-color: green;
+    background-color: #34c494;
   }
 
   .custom-button-btn.mark.noted {

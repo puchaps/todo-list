@@ -1,61 +1,77 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 
 import { AUTH } from "../firebase/firebase.utils";
-import { getUserAuthAC } from "./actions/main.actions";
-
-import { 
-  fixChangesDataInLocalStorage,
-  setDataInLocalStorageOrGeted
-} from "./local-storage/local-storage.utils";
+import {
+  getUserAuthFailedAC,
+  getUserAuthSuccessAC,
+  setDataFromLocalStorageAC,
+} from "./actions/main.actions";
 
 import mainReducer from "./reducer/main.reducer";
 
 export const MainContext = React.createContext();
 
-const MainProvider = ({children}) => {
-  const[state, dispatch] = useReducer(mainReducer, {
-    inputValue: '',
+const MainProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(mainReducer, {
+    inputValue: "",
     todoListItems: [],
-    selectValue: 'all',
+    selectValue: "all",
     sortItemsBySelectValue: [],
-    currentUser: null
+    currentUser: null,
+    error: null,
   });
 
-  const{todoListItems} = state;
+  const { todoListItems } = state;
 
-  const getUserAuth = () => {
+  const handleGetUserAuth = useCallback(() => {
     try {
-      AUTH.onAuthStateChanged( async (userAuth) => {
+      AUTH.onAuthStateChanged(async (userAuth) => {
         if (userAuth) {
-          dispatch(getUserAuthAC({
-            displayName: userAuth.displayName,
-            email: userAuth.email,
-            id: userAuth.uid
-            }
-          ));
+          dispatch(
+            getUserAuthSuccessAC({
+              displayName: userAuth.displayName,
+              email: userAuth.email,
+              id: userAuth.uid,
+            })
+          );
         } else {
-          dispatch(getUserAuthAC(null));
-        };
+          dispatch(getUserAuthSuccessAC(null));
+        }
       });
-    } catch(error) {
-      console.log(error.massege);
+    } catch (error) {
+      dispatch(getUserAuthFailedAC(error.message));
     }
-  };
-
-  useEffect(() => {
-    setDataInLocalStorageOrGeted({dispatch, todoListItems: todoListItems});
-    getUserAuth();
   }, []);
 
-  useEffect(() => {
-    fixChangesDataInLocalStorage(todoListItems);
+  const setDataInLocalStorage = useCallback(() => {
+    if (localStorage.getItem("todoList") === null) {
+      localStorage.setItem("todoList", JSON.stringify([]));
+    } else {
+      const response = localStorage.getItem("todoList", JSON.stringify());
+
+      dispatch(setDataFromLocalStorageAC(JSON.parse(response)));
+    }
+  }, []);
+
+  const fixChangesDataInLocalStorage = useCallback(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoListItems));
   }, [todoListItems]);
 
-  return(
-    <MainContext.Provider value = {{
-      state,
-      dispatch
-    }}>
+  useEffect(() => {
+    handleGetUserAuth();
+    setDataInLocalStorage();
+  }, [handleGetUserAuth, setDataInLocalStorage]);
+
+  useEffect(() => {
+    fixChangesDataInLocalStorage();
+  }, [fixChangesDataInLocalStorage]);
+  return (
+    <MainContext.Provider
+      value={{
+        state,
+        dispatch,
+      }}
+    >
       {children}
     </MainContext.Provider>
   );

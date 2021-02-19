@@ -1,18 +1,21 @@
-import { useContext } from 'react';
-import { MainContext } from '../../context/main.context';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useContext } from "react";
+import { MainContext } from "../../context/main.context";
 
-import './added-items.styles.scss';
+import "./added-items.styles.scss";
 
-import AddedItem from '../added-item/added-item.component';
+import AddedItem from "../added-item/added-item.component";
 
 const AddedItems = () => {
-  const{state: { sortItemsBySelectValue }} = useContext(MainContext);
+  const {
+    state: { sortItemsBySelectValue },
+  } = useContext(MainContext);
 
-  return(
+  return (
     <div className="added-items">
-      {
-        sortItemsBySelectValue.map((item) => <AddedItem key = {item.id} {...item}/>)
-      }
+      {sortItemsBySelectValue.map((item) => (
+        <AddedItem key={item.id} {...item} />
+      ))}
     </div>
   );
 };
